@@ -1,0 +1,71 @@
+plugins {
+    id 'com.android.library'
+}
+def moduleName = 'banjo-rangebar'
+
+android {
+    compileSdkVersion project.COMPILE_SDK_VERSION
+    buildToolsVersion project.COMPILE_BUILDTOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion project.MIN_SDK_VERSION
+        targetSdkVersion project.TARGET_SDK_VERSION
+        versionCode 10004090
+        versionName "1.0.0"
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            android.libraryVariants.all { variant ->
+                if (variant.buildType.name == "release") {
+                    variant.outputs.all {
+                        outputFileName = "${moduleName}-v${android.defaultConfig.versionName}.aar"
+                    }
+                    variant.assemble.doLast {
+                        variant.outputs.all { output ->
+                            // 输出目录在：项目目录/build/outputs/aar/日期-gitCommit/
+                            def outputPath = [project.rootDir.absolutePath, "dist"].join(File.separator)
+                            copy {
+                                from output.outputFile
+                                into outputPath
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compileOnly(name: 'ffmpegcmd-release', ext: 'aar')
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+
+    compileOnly 'com.github.wseemann:FFmpegMediaMetadataRetriever-core:1.0.15'
+    compileOnly 'com.github.wseemann:FFmpegMediaMetadataRetriever-native:1.0.15'
+
+    compileOnly 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    compileOnly 'io.reactivex.rxjava3:rxjava:3.0.7'
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}

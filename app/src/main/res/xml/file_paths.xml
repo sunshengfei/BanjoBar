@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+  <!--填写你要所要申请访问的目录地址，name最好是你的目录名，path是你要申请的目录-->
+  <external-path name="camera_photos" path="."/>
+  <external-path name="app" path="Android/data/io.fuwafuwa.banjo.test/"/>
+  <external-path name="cache" path="Android/data/io.fuwafuwa.banjo.test/cache"/>
+  <external-path name="App" path="Banjo/"/>
+  <external-path name="images" path="Pictures/"/>
+  <external-path name="images" path="Data/image/"/>
+  <external-path name="dcim" path="DCIM/"/>
+  <external-path name="Movies"  path="Movies"/>
+  <external-path name="Downloads"  path="Downloads"/>
+  <external-path path="Movies/Browser" name="moviesBrowser" />
+  <external-path path="." name="external_storage_root" />
+</paths>

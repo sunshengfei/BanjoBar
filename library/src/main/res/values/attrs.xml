@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SelectionBar">
+        <attr name="showIndicator" format="boolean" />
+        <attr name="progressMode" format="boolean" />
+        <attr name="contentAlwaysScroll" format="boolean" />
+        <attr name="showClipBorder" format="boolean" />
+        <attr name="vibrate" format="boolean" />
+        <attr name="progressBarColor" format="color" />
+        <attr name="indicatorColor" format="color" />
+        <attr name="thumbWidth" format="dimension" />
+        <attr name="thumbHeight" format="dimension" />
+        <attr name="thumbSizeRatio" format="float" />
+        <attr name="displayMode" format="integer">
+            <enum name="overlay" value="0" />
+            <enum name="expand_after" value="1" />
+            <enum name="expand_before" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="colorPrimary">#fdde4a</color>
+    <color name="colorPrimaryDark">#fdde4a</color>
+    <color name="colorAccent">#00CCFF</color>
+    <color name="colorAccentAlpha">#80fdde4a</color>
+    <color name="textColorPrimary">#3e3e3e</color>
+    <color name="themeColor">#00CCFF</color>
+    <color name="warnColor">#ab1e28</color>
+
+    <!-- 509fea -->
+    <color name="cardBackground">#FFFFFF</color>
+    <!-- Male Female-->
+    <!-- tabbar-->
+    <color name="windowBackground">#F2F6FA</color>
+    <color name="secondary_windowBackground">#FFFFFF</color>
+    <color name="milk">#ededed</color>
+    <color name="golden">#f2c769</color>
+    <color name="white_press">#f1f1f1</color>
+    <color name="dividerColor">#f1f1f1</color>
+    <color name="line">#e1e1e1</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="transparentMaskDesc">#20000000</color>
+    <color name="transparentMask">#AA000000</color>
+    <color name="holo">#20000000</color>
+    <color name="solidMask">#393A3A</color>
+    <color name="holoInf">#B0D2EC</color>
+
+    <color name="primaryTextColorOnLight">#E2BB01</color>
+    <color name="defaultTextColor">#3e3e3e</color>
+    <color name="tabColorSelected">#FF1E00</color>
+    <color name="tabColorUnselected">#dbdbdb</color>
+    <color name="defaultLightTextColor">#AfAEAf</color>
+    <color name="defaultHintTextColor">#AEAEAE</color>
+    <color name="whiteTextColor">#ededed</color>
+    <color name="whiteHintTextColor">#eaeaea</color>
+    <color name="errorTextColor">#FF4433</color>
+    <color name="colorDiameterNormal">#fdde4a</color>
+    <color name="colorDiameterHigh">#55C501</color>
+    <color name="colorDiameterPerfect">#07C518</color>
+    <color name="colorDiameterMiddle">#6904B6</color>
+
+    <color name="running">#9004660D</color>
+    <color name="remark">#fef3a1</color>
+    <color name="themeforecolor">#000000</color>
+
+    <color name="possible_result_points">#c0ffbd21</color> <!-- Android standard ICS color -->
+    <color name="result_points">#c099cc00</color> <!-- Android standard ICS color -->
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_laser">#ffcc0000</color> <!-- Android standard ICS color -->
+    <color name="viewfinder_mask">#60000000</color>
+</resources>

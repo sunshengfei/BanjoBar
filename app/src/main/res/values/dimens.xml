@@ -1,0 +1,57 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <!-- @Common -->
+    <dimen name="actionBarSize">44dp</dimen>
+    <!-- Margin-->
+    <dimen name="tableMargin">16dp</dimen>
+    <dimen name="formMargin">16dp</dimen>
+    <dimen name="fieldSetMargin">10dp</dimen>
+    <dimen name="lineButtonMargin">36dp</dimen>
+    <dimen name="msgItemMargin">60dp</dimen>
+
+    <!-- Padding-->
+    <dimen name="menuPadding">6dp</dimen>
+    <dimen name="tablePadding">10dp</dimen>
+    <dimen name="formPadding">16dp</dimen>
+    <dimen name="iconPadding">6dp</dimen>
+    <dimen name="cardPadding">12dp</dimen>
+    <dimen name="textPadding">6dp</dimen>
+    <dimen name="tabbarPadding">4dp</dimen>
+
+    <!-- Cell Spacing -->
+    <dimen name="tableCellSpacing">8dp</dimen>
+    <dimen name="fieldSpacing">10dp</dimen>
+    <dimen name="iconSpacing">3dp</dimen>
+    <dimen name="letterSpacing">2dp</dimen>
+    <dimen name="letterGap">6dp</dimen>
+    <dimen name="textLineSpacing">6dp</dimen>
+
+    <!--Font size-->
+    <dimen name="XH5">26sp</dimen>
+    <dimen name="XH6">24sp</dimen>
+
+    <dimen name="H1">20sp</dimen>
+    <dimen name="H2">18sp</dimen>
+    <dimen name="H3">16sp</dimen>
+    <dimen name="H4">14sp</dimen>
+    <dimen name="H5">12sp</dimen>
+    <dimen name="H6">10sp</dimen>
+
+    <!--border line-->
+    <dimen name="dividerThick">1dp</dimen>
+    <dimen name="commonCornerRadius">2dp</dimen>
+    <dimen name="btnRadius">24dp</dimen>
+
+    <!-- Height -->
+    <dimen name="inputFieldHeight">42dp</dimen>
+    <dimen name="tabBarHeight">48dp</dimen>
+
+    <dimen name="contentComposerHeight">200dp</dimen>
+
+    <!-- DIY -->
+
+    <dimen name="avatarNormal">36dp</dimen>
+    <dimen name="wf_holder_height">102dp</dimen>
+
+</resources>

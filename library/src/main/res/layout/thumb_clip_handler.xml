@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="64dp">
+
+    <RelativeLayout
+        android:id="@+id/thumb_clip_left_handler"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:paddingLeft="-7dp"
+            android:paddingRight="-11dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/left_handler_normal" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/thumb_clip_progress_layout"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:background="#500000ff"
+        android:translationX="17dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/thumb_clip_background"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/thumb_clip_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:autoSizeMaxTextSize="18sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeTextType="uniform"
+            android:clickable="false"
+            android:focusable="false"
+            android:gravity="center"
+            android:maxLines="2"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:textColor="@color/segment_label_color"
+            tools:ignore="UnusedAttribute"
+            tools:text="标签" />
+
+        <io.fuwafuwa.banjo.ui.ProgressView
+            android:id="@+id/thumb_clip_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+        <View
+            android:id="@+id/thumb_clip_selected"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@+id/thumb_clip_progress"
+            android:layout_alignBottom="@+id/thumb_clip_progress"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/thumb_clip_right_handler"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:translationX="117dp">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:paddingLeft="-11dp"
+            android:paddingRight="-7dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/right_handler_normal" />
+    </RelativeLayout>
+</FrameLayout>

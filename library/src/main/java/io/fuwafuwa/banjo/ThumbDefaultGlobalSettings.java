@@ -17,7 +17,9 @@ public class ThumbDefaultGlobalSettings {
     }
 
     public static class Config {
-
+        /**
+         *  使用震动
+         */
         public boolean userReactVibrate = true;
         /**
          * 选中区域边框
@@ -59,6 +61,7 @@ public class ThumbDefaultGlobalSettings {
 
         /**
          * 是否允许滑块交叠
+         * @waitforimplements 暂未实现
          */
         public boolean isThumbCanCross = false;
 

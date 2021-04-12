@@ -1,12 +1,16 @@
 package io.fuwafuwa.banjo.test
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import io.androidx.ffmpeg.RxProbe
-import io.fuwafuwa.banjo.*
+import io.fuwafuwa.banjo.IThumbHandlerProvider
+import io.fuwafuwa.banjo.IThumbTrackProvider
+import io.fuwafuwa.banjo.OnThumbActionListener
+import io.fuwafuwa.banjo.ThumbDefaultGlobalSettings
 import io.fuwafuwa.banjo.extension.Frame
 import io.fuwafuwa.banjo.extension.MediaUtils
 import io.fuwafuwa.banjo.extension.T
@@ -19,14 +23,13 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_banjo.*
 import java.io.File
-import java.util.*
 
 class BanjoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_banjo)
         Frame.init(windowManager)
-
+        dataSource = intent?.getStringExtra("url").toString()
         val mThumbActionListener: OnThumbActionListener = object : OnThumbActionListener {
             override fun onSegmentChange(
                 thumbSegmentProvider: IThumbHandlerProvider<View>?,
@@ -96,6 +99,10 @@ class BanjoActivity : AppCompatActivity() {
             ) {
 
             }
+
+            override fun onSelectTrack(thumbTrackProvider: IThumbTrackProvider<IThumbHandlerProvider<View>, *>?) {
+
+            }
         }
 
         rangeBar2.setThumbActionListener(mThumbActionListener)
@@ -113,7 +120,16 @@ class BanjoActivity : AppCompatActivity() {
         }
         buttonTest212.setOnClickListener {
             val trackConfig = TrackConfig()
-            trackConfig.trackBackground = ContextCompat.getDrawable(this, R.drawable.wave)
+//            trackConfig.trackBackground = ContextCompat.getDrawable(this, R.drawable.wave)
+            if (rangeBar2.trackList?.size!! > 2) {
+                trackConfig.trackBackground = ColorDrawable(
+                    Color.argb(
+                        0x80, (Math.random() * 255).toInt(),
+                        (Math.random() * 255).toInt(),
+                        (Math.random() * 255).toInt()
+                    )
+                )
+            }
             rangeBar2.addThumbGroup(trackConfig)
         }
 
@@ -126,6 +142,28 @@ class BanjoActivity : AppCompatActivity() {
             config.isScrollableWhenLess = isChecked
             rangeBar2.updateConfig(config)
         }
+
+        buttonTest213.setOnClickListener {
+//            val deleteList: MutableList<Pair<Int, Int>> = MutableList()
+            for (i in 0 until rangeBar2.trackDataList.size) {
+                var track = rangeBar2.trackDataList.get(i)
+                var j = 0
+                while (j < track.size) {
+                    var segment = track.get(j)
+                    if (segment.isSelected) {
+                        rangeBar2.trashThumb(j, i)
+                        j--
+                    }
+                    j++
+                }
+            }
+        }
+        buttonTest214.setOnClickListener {
+            if (rangeBar2.trackList?.size!! > 0) {
+                rangeBar2.trashTrack(rangeBar2.trackList?.size!! - 1)
+            }
+        }
+
         path.setText(dataSource2)
         buttonTest3.setOnClickListener {
             var file = path.text.toString()
@@ -149,6 +187,8 @@ class BanjoActivity : AppCompatActivity() {
 //        config.preferThumbExtractor = ExtractHandler.MMR
     }
 
+    var alphaBet = 'A'
+
     private fun addThumb() {
         var list = rangeBar2.trackList
         if (list == null || list.size == 0) return
@@ -158,7 +198,27 @@ class BanjoActivity : AppCompatActivity() {
         segment.to = -1f
         val cfg = SegmentConfig()
         cfg.selectedColor = 0x800000FF.toInt()
-//            cfg.justify = BarJustify.FIXED
+        segment.label = alphaBet++.toString()
+        cfg.defaultHideHandler = true
+        cfg.selectedColor =
+            Color.argb(
+                0x80, (Math.random() * 255).toInt(),
+                (Math.random() * 255).toInt(),
+                (Math.random() * 255).toInt()
+            )
+        cfg.maskColor = Color.argb(
+            0x80, (Math.random() * 255).toInt(),
+            (Math.random() * 255).toInt(),
+            (Math.random() * 255).toInt()
+        )
+        cfg.maskBackground = ColorDrawable(
+            Color.argb(
+                0x80, (Math.random() * 255).toInt(),
+                (Math.random() * 255).toInt(),
+                (Math.random() * 255).toInt()
+            )
+        )
+//          cfg.justify = BarJustify.FIXED
 //          cfg.maskBackground = ContextCompat.getDrawable(this, R.drawable.ic_launcher_background)
 //          if (index == 1) {
 //              cfg.maskBackground = ContextCompat.getDrawable(this, R.drawable.wave)
@@ -167,17 +227,10 @@ class BanjoActivity : AppCompatActivity() {
     }
 
     private lateinit var config: ThumbDefaultGlobalSettings.Config
-    val list: MutableList<ThumbNaiUnit> = ArrayList()
 
     var dataSource2 = "/sdcard/Movies/1998-Bravo-AllStars-Let-The-Music-Heal-Your-Soul.mp4"
-
-    //    var dataSource = "/sdcard/Movies/d.1.mp4"
-//    var dataSource = "/sdcard/Movies/ddd.mp4"
     var dataSource = "/sdcard/Movies/A_10_1.mp4"
-
-    //    var dataSource = "/sdcard/Movies/1111.mp4"
     var frameSize = Size(90, 120)
-
     private fun startBanjoClip() {
         var videoName = File(dataSource).name
         var outputDir = getExternalFilesDir("")?.absolutePath + File.separator + videoName
@@ -196,16 +249,11 @@ class BanjoActivity : AppCompatActivity() {
         } else {
             spanMills = 500
         }
-//        VideoThumbNailExtractor.useFastMode = false
         rangeBar2.attachVideoSource(
             dataSource,
             outputDir,
             spanMills, frameSize
         )
-//        rangeBar2.postDelayed(Runnable {
-//            rangeBar2.addThumb(0, -1)
-////            rangeBar.addThumb()
-//        }, 200)
     }
 
 

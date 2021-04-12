@@ -12,6 +12,7 @@ public class Segment implements Serializable {
     private CharSequence label;
     private float from;
     private float to;
+    private boolean isSelected = true;
 
     public long getId() {
         return id;
@@ -51,5 +52,13 @@ public class Segment implements Serializable {
 
     public void setTo(float to) {
         this.to = to;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

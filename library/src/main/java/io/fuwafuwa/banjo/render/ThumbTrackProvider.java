@@ -24,10 +24,10 @@ import io.fuwafuwa.banjo.IThumbHandlerProvider;
 import io.fuwafuwa.banjo.IThumbTrackProvider;
 import io.fuwafuwa.banjo.OnThumbActionListener;
 import io.fuwafuwa.banjo.R;
-import io.fuwafuwa.banjo.extension.T;
 import io.fuwafuwa.banjo.ThumbDefaultGlobalSettings;
 import io.fuwafuwa.banjo.ThumbGroupAccessNode;
 import io.fuwafuwa.banjo.TrackEventDispatcher;
+import io.fuwafuwa.banjo.extension.T;
 import io.fuwafuwa.banjo.model.Segment;
 import io.fuwafuwa.banjo.profile.BarJustify;
 import io.fuwafuwa.banjo.profile.SegmentConfig;
@@ -163,6 +163,8 @@ public class ThumbTrackProvider implements IThumbTrackProvider<IThumbHandlerProv
                             whenSelected(currentClickChildIndex);
                         }
                         currentClickChildIndex = -1;
+                    } else {
+                        whenSelectTrack(ThumbTrackProvider.this);
                     }
                     return true;
                 }
@@ -202,6 +204,12 @@ public class ThumbTrackProvider implements IThumbTrackProvider<IThumbHandlerProv
         return handlerView;
     }
 
+    private void whenSelectTrack(ThumbTrackProvider thumbTrackProvider) {
+        if (mThumbActionListener != null) {
+            mThumbActionListener.onSelectTrack(thumbTrackProvider);
+        }
+    }
+
     private void postReloadChild(View parent, View child, @NonNull List<IThumbHandlerProvider<View>> thumbs, boolean isSystem) {
         for (IThumbHandlerProvider<View> thumbView : thumbs) {
             if (thumbView != null && thumbView.provideView() == child) {
@@ -226,10 +234,11 @@ public class ThumbTrackProvider implements IThumbTrackProvider<IThumbHandlerProv
         SegmentConfig config = new SegmentConfig();
         config.justify = BarJustify.FIXED;
         config.maskColor = Color.TRANSPARENT;
+        config.selectedColor = Color.YELLOW;
         IThumbHandlerProvider<View> thumbView = makeComponentProvider(config);
         View childView = makeComponent(null, thumbView);
-        childView.setMinimumWidth(100);
         childView.setVisibility(View.INVISIBLE);
+        childView.setMinimumWidth(300);
         internals.add(thumbView);
         handlerView.addView(childView, 0);
         hasSetup = true;
@@ -431,11 +440,11 @@ public class ThumbTrackProvider implements IThumbTrackProvider<IThumbHandlerProv
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        if (mTrackEventDispatcher != null) {
-            if (mTrackEventDispatcher.ignore()) {
-                return false;
-            }
-        }
+//        if (mTrackEventDispatcher != null) {
+//            if (mTrackEventDispatcher.ignore()) {
+//                return false;
+//            }
+//        }
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             if (v == handlerView) {
                 int count = thumbs.size();

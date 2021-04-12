@@ -32,8 +32,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import io.fuwafuwa.banjo.profile.ExtractHandler;
 import io.fuwafuwa.banjo.model.Size;
+import io.fuwafuwa.banjo.profile.ExtractHandler;
 
 import static android.media.ThumbnailUtils.OPTIONS_RECYCLE_INPUT;
 
@@ -115,7 +115,9 @@ public class VideoThumbNailExtractor {
         this.callback = callback;
         /* 获取视频总时长 */
         long duration = MediaUtils.getDuration(dataSource);
+        if (duration == 0) throw new RuntimeException("duration is zero");
         /* 计算生成的缩略图数量 */
+        if (spanMills == 0) spanMills = 1;
         int thumbnailCount = (int) (duration / spanMills);
         /* 创建序列插槽 */
         long secPoint = 0L;

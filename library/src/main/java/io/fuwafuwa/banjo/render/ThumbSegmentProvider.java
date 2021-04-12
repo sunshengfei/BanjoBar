@@ -20,10 +20,10 @@ import java.lang.ref.SoftReference;
 import io.fuwafuwa.banjo.IThumbHandlerProvider;
 import io.fuwafuwa.banjo.OnThumbActionListener;
 import io.fuwafuwa.banjo.R;
-import io.fuwafuwa.banjo.extension.T;
 import io.fuwafuwa.banjo.ThumbDefaultGlobalSettings;
 import io.fuwafuwa.banjo.ThumbGroupAccessNode;
 import io.fuwafuwa.banjo.extension.SensorUtil;
+import io.fuwafuwa.banjo.extension.T;
 import io.fuwafuwa.banjo.model.Segment;
 import io.fuwafuwa.banjo.model.Size;
 import io.fuwafuwa.banjo.profile.BarJustify;
@@ -97,6 +97,12 @@ public class ThumbSegmentProvider implements IThumbHandlerProvider<View>, View.O
     @Override
     public void setThumbBackground(Drawable drawable) {
         if (drawable != null) {
+            ViewGroup.LayoutParams prams = thumbBackImage.getLayoutParams();
+            if (prams != null) {
+                prams.width = drawable instanceof ColorDrawable ?
+                        ViewGroup.LayoutParams.MATCH_PARENT : ViewGroup.LayoutParams.WRAP_CONTENT;
+                thumbBackImage.setLayoutParams(prams);
+            }
             int mH = handlerView.getMeasuredHeight();
             if (mH == 0) {
                 Size thumbNailSize = this.config.blockSize;
@@ -146,6 +152,7 @@ public class ThumbSegmentProvider implements IThumbHandlerProvider<View>, View.O
         if (segment.getLabel() != null) {
             thumbProgressLabel.setText(segment.getLabel());
         }
+        renderWhenSelected(segment.isSelected());
     }
 
     @Override
@@ -439,6 +446,14 @@ public class ThumbSegmentProvider implements IThumbHandlerProvider<View>, View.O
 
     @Override
     public void setSelected(boolean isSelected) {
+        renderWhenSelected(isSelected);
+        segment.setSelected(isSelected);
+        if (isSelected) {
+            handlerView.bringToFront();
+        }
+    }
+
+    private void renderWhenSelected(boolean isSelected) {
         handlerView.setEnabled(true);
         switch (config.justify) {
             case FIXED:
@@ -455,9 +470,6 @@ public class ThumbSegmentProvider implements IThumbHandlerProvider<View>, View.O
                 thumbLeftHandler.setVisibility(isSelected ? View.VISIBLE : View.INVISIBLE);
                 thumbRightHandler.setVisibility(isSelected ? View.VISIBLE : View.INVISIBLE);
                 break;
-        }
-        if (isSelected) {
-            handlerView.bringToFront();
         }
     }
 

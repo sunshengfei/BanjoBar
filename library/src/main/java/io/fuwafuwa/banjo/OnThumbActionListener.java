@@ -1,10 +1,12 @@
 package io.fuwafuwa.banjo;
 
 import android.view.View;
+import android.widget.FrameLayout;
 
 import java.util.List;
 
 import io.fuwafuwa.banjo.model.Segment;
+import io.fuwafuwa.banjo.render.ThumbTrackProvider;
 import io.fuwafuwa.banjo.ui.ThumbNaiUnit;
 
 public interface OnThumbActionListener {
@@ -24,11 +26,13 @@ public interface OnThumbActionListener {
 
     void onSelection(IThumbHandlerProvider<View> thumbSegmentProvider, Segment segment);
 
-    void onSelectionCheckedChange(IThumbHandlerProvider<View> thumbSegmentProvider, Segment segment,boolean isSelected);
+    void onSelectionCheckedChange(IThumbHandlerProvider<View> thumbSegmentProvider, Segment segment, boolean isSelected);
 
     void onDataSetChanged(List<ThumbNaiUnit> list);
 
     void onSegmentAdded(IThumbHandlerProvider<View> thumbView);
 
     void onSegmentRemoved(IThumbHandlerProvider<View> thumbView);
+
+    void onSelectTrack(IThumbTrackProvider<IThumbHandlerProvider<View>, ?> thumbTrackProvider);
 }

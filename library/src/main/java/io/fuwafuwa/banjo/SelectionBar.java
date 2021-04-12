@@ -652,6 +652,13 @@ public class SelectionBar extends ConstraintLayout {
         }
     }
 
+    public void trashTrack(int trackIndex) {
+        IThumbTrackProvider<IThumbHandlerProvider<View>, FrameLayout> vm = thumbTrackList.remove(trackIndex);
+        FrameLayout view = vm.provideView();
+        tracksContainer.removeView(view);
+        renderThumbGroupProviderList();
+    }
+
     public void setThumbActionListener(OnThumbActionListener mThumbActionListener) {
         this.mThumbActionListener = mThumbActionListener;
         for (IThumbTrackProvider thumbGroupProvider : thumbTrackList) {
@@ -695,10 +702,32 @@ public class SelectionBar extends ConstraintLayout {
         }
     }
 
-
     @Nullable
     public List<IThumbTrackProvider<IThumbHandlerProvider<View>, FrameLayout>> getTrackList() {
         return thumbTrackList;
+    }
+
+    public List<List<Segment>> getTrackDataList() {
+        List<List<Segment>> segments = new ArrayList<>();
+        for (IThumbTrackProvider<IThumbHandlerProvider<View>, FrameLayout> trackProvider : thumbTrackList) {
+            segments.add(trackProvider.getAllSegment());
+        }
+        return segments;
+    }
+
+
+    public boolean isTracksPresent() {
+        return tracksContainer.getVisibility() == VISIBLE;
+    }
+
+    public void showTrackViews(boolean isShow) {
+        tracksContainer.setVisibility(isShow ? VISIBLE : GONE);
+    }
+
+    public int getCurrentProgress() {
+        if (settings.isTimeLineMode)
+            return mTotalScrollX;
+        return -1;
     }
     //endregion
 
